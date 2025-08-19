@@ -3,7 +3,7 @@ WORKDIR "/app"
 
 COPY ./package.json ./
 
-RUN npm run install
+RUN npm install
 
 COPY ./ ./
 
