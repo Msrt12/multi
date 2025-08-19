@@ -4,8 +4,6 @@ name: Docker Build, Test, and Deploy
 on:
   push:
     branches: [main]
-  pull:
-    branches: [main]
 
 
 jobs:
@@ -36,12 +34,26 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{DOCKER_ID}}
+        password: ${{DOCKER_TOKEN}}
 
-    - name: Build production version
+
+    - name: Build production version and push to Docker Hub
       run: |
         docker build -t client ./client
         docker build -t nginx ./nginx
         docker build -t server ./server
         docker build -t worker ./worker 
+
+
+        docker push client
+        docker push nginx
+        docker push server
+        docker push worker
+
 
                
