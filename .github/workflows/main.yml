@@ -44,16 +44,16 @@ jobs:
 
     - name: Build production version and push to Docker Hub
       run: |
-        docker build -t client ./client
-        docker build -t nginx ./nginx
-        docker build -t server ./server
-        docker build -t worker ./worker 
+        docker build -t ${{ secrets.DOCKER_ID }}/client:latest ./client
+        docker build -t ${{ secrets.DOCKER_ID }}/nginx:latest ./nginx
+        docker build -t ${{ secrets.DOCKER_ID }}/server:latest ./server
+        docker build -t ${{ secrets.DOCKER_ID }}/worker:latest ./worker 
 
 
-        docker push client
-        docker push nginx
-        docker push server
-        docker push worker
+        docker push ${{ secrets.DOCKER_ID }}/client:latest
+        docker push ${{ secrets.DOCKER_ID }}/nginx:latest
+        docker push ${{ secrets.DOCKER_ID }}/server:latest
+        docker push ${{ secrets.DOCKER_ID }}/worker:latest
 
 
                
