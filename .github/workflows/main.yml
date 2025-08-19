@@ -10,7 +10,7 @@ jobs:
 
   test:
 
-    runs_on: ubuntu-latest 
+    runs-on: ubuntu-latest 
 
     steps:
 
@@ -26,7 +26,7 @@ jobs:
 
   deploy:
 
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     needs: test
 
@@ -38,8 +38,8 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{DOCKER_ID}}
-        password: ${{DOCKER_TOKEN}}
+        username: ${{ secrets.DOCKER_ID }}
+        password: ${{ secrets.DOCKER_ID }}
 
 
     - name: Build production version and push to Docker Hub
