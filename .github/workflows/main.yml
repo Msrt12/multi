@@ -54,6 +54,27 @@ jobs:
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/server:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/worker:latest
+ # ОНОВЛЕННЯ DOCKER COMPOSE З РЕАЛЬНИМИ ІМЕНАМИ ОБРАЗІВ
+    - name: Update docker-compose with actual image names
+      run: |
+        sed -i "s|image: mstr12/client|image: ${{ secrets.DOCKERHUB_USERNAME }}/client:latest|g" docker-compose.yml
+        sed -i "s|image: mstr12/nginx|image: ${{ secrets.DOCKERHUB_USERNAME }}/nginx:latest|g" docker-compose.yml
+        sed -i "s|image: mstr12/server|image: ${{ secrets.DOCKERHUB_USERNAME }}/server:latest|g" docker-compose.yml
+        sed -i "s|image: mstr12/worker|image: ${{ secrets.DOCKERHUB_USERNAME }}/worker:latest|g" docker-compose.yml
 
-
-               
+    # ДЕПЛОЙ НА ELASTIC BEANSTALK З DOCKER COMPOSE
+    - name: Deploy to Elastic Beanstalk with Docker Compose
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}         # 8. secret_access_key
+        application_name: multi-docker # 2. app
+        environment_name: Multi-docker-env    # 3. env
+        region: us-east-1                      # 1. region
+        version_label: multi-docker-${{ github.sha }}
+        deployment_package: docker-compose.yml                 # ВИКОРИСТОВУЄМО DOCKER COMPOSE
+        existing_bucket_name: elasticbeanstalk-us-east-1-947625949622
+        bucket_path: docker-multi     # 4. bucket_name
+        use_existing_version_if_available: true
+        wait_for_deployment: true
+                
