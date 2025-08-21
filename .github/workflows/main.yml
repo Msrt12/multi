@@ -74,7 +74,6 @@ jobs:
         version_label: multi-docker-${{ github.sha }}
         deployment_package: docker-compose.yml                 # ВИКОРИСТОВУЄМО DOCKER COMPOSE
         existing_bucket_name: elasticbeanstalk-us-east-1-947625949622
-        bucket_path: docker-multi     # 4. bucket_name
         use_existing_version_if_available: true
         wait_for_deployment: true
                 
