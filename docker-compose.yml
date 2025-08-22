@@ -1,31 +1,31 @@
-version: "3"
-services:
-  client:
-    image: "mstr12/client"
-    mem_limit: 128m
-    hostname: client
-  server:
-    image: "mstr12/server"
-    mem_limit: 128m
-    hostname: api
-    environment:
-      - REDIS_HOST=REDIS_HOST  # <- Без $
-      - REDIS_PORT=REDIS_PORT  # <- Без $
-      - PGUSER=PGUSER          # <- Без $
-      - PGHOST=PGHOST          # <- Без $
-      - PGDATABASE=PGDATABASE  # <- Без $
-      - PGPASSWORD=PGPASSWORD  # <- Без $
-      - PGPORT=PGPORT          # <- Без $
-  worker:
-    image: "mstr12/worker"
-    mem_limit: 128m
-    hostname: worker
-    environment:
-      - REDIS_HOST=REDIS_HOST  # <- Без $
-      - REDIS_PORT=REDIS_PORT  # <- Без $
-  nginx:
-    image: "mstr12/nginx"
-    mem_limit: 128m
-    hostname: nginx
-    ports:
-      - "80:80"
+    version: "3"
+    services:
+      client:
+        image: "mstr12/client"
+        mem_limit: 128m
+        hostname: client
+      server:
+        image: "mstr12/server"
+        mem_limit: 128m
+        hostname: api
+        environment:
+          - REDIS_HOST=$REDIS_HOST
+          - REDIS_PORT=$REDIS_PORT
+          - PGUSER=$PGUSER
+          - PGHOST=$PGHOST
+          - PGDATABASE=$PGDATABASE
+          - PGPASSWORD=$PGPASSWORD
+          - PGPORT=$PGPORT
+      worker:
+        image: "mstr12/worker"
+        mem_limit: 128m
+        hostname: worker
+        environment:
+          - REDIS_HOST=$REDIS_HOST
+          - REDIS_PORT=$REDIS_PORT
+      nginx:
+        image: "mstr12/nginx"
+        mem_limit: 128m
+        hostname: nginx
+        ports:
+          - "80:80"
