@@ -68,8 +68,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}         # 8. secret_access_key
-        application_name: multi-docker # 2. app
-        environment_name: Multi-docker-env    # 3. env
+        application_name: multi-docker1       # 2. app
+        environment_name: Multi-docker1-env    # 3. env
         region: us-east-1                      # 1. region
         version_label: multi-docker-${{ github.sha }}
         deployment_package: docker-compose.yml                 # ВИКОРИСТОВУЄМО DOCKER COMPOSE
