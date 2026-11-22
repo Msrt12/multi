@@ -3,7 +3,7 @@
 
 ## Architecture
 
-![Multi-Container Docker Architecture](images/architecture.png)
+![Multi-Container Docker Architecture](infr.png)
 
 A multi-container application demonstrating containerization, service communication, and application orchestration using Docker and Docker Compose.
 
